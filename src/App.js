@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState ,useEffect} from 'react';
 
-function App() {
+
+export default function App() 
+{ 
+
+
+
+  const [string , setString] = useState("https://source.unsplash.com/collection/559527") ;
+
+  const arr = ["https://source.unsplash.com/collection/559527","https://source.unsplash.com/collection/402504"];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+       setString(
+           function (prevLink){
+             if(prevLink===arr[0])
+             {
+               return arr[1];
+             }
+             else
+             {
+               return arr[0];
+             }
+           }
+       )
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
-export default App;
+     
+    <div>
+
+      <img src = {string} /> 
+     
+    </div>
+
+
+  )
+
+}
